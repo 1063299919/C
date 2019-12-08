@@ -1,0 +1,44 @@
+{
+  "version": "2.0.0",
+  "command": "g++",
+  "args": 
+        [
+            "-g",
+            //"-fexec-charset=GBK",   // 处理mingw中文编码问题
+            //"-finput-charset=UTF-8",// 处理mingw中文编码问题
+            "${file}",
+            "-o",
+            "${fileDirname}/${fileBasenameNoExtension}.exe"
+        ],
+  "problemMatcher": 
+        {
+            "owner": "cpp",
+            "fileLocation": 
+                [
+                    "relative",
+                    "${workspaceRoot}"
+                ],
+            "pattern": 
+            {
+                "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                "file": 1,
+                "line": 2,
+                "column": 3,
+                "severity": 4,
+                "message": 5
+            }
+        },
+  "presentation":
+        {
+            "echo": true,
+            "reveal": "always", // 执行任务时是否跳转到终端面板，可以为always，silent，never。具体参见VSC的文档
+            "focus": false, // 设为true后可以使执行task时焦点聚集在终端，但对编译C/C++来说，设为true没有意义
+            "panel": "shared" // 不同的文件的编译信息共享一个终端面板
+        },
+
+  "group": 
+        {
+            "kind": "build",
+            "isDefault": true
+        }
+}
