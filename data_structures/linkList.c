@@ -25,8 +25,10 @@ typedef struct list
     link first;//指向第一个节点的指针
 }List;
 
-List ListInit(void)
+List* ListInit(void)
 {
-    List L = malloc(sizeof(*List));
+    List *L = malloc(sizeof(List));
+    L->first = NULL;
+    return L;
 }
 
