@@ -31,6 +31,7 @@
 *
 ******************************************************************************/
 #include<stdio.h>
+#include<stdlib.h>
 typedef struct Student
 {
     int number;
@@ -39,10 +40,67 @@ typedef struct Student
     struct Student *next_p;
 }student;//定义学生的结构体
 
-student *head_p = NULL;
-
-void init(void)
+void getInput(student *stu)
 {
-    head_p = (student*)malloc(sizeof(student));
-    head_p->next_p = NULL;
+    //printf("input mumber\n");
+    scanf("%d",&stu->number);
+    //printf("input name\n");
+    //scanf("%s",stu->name);
+    //printf("input score\n");
+    //scanf("%d",&stu->score);
+}
+void print(student *stu)
+{
+    printf("%d\n",stu->number);
+    //printf("%s",stu->name);
+    //printf("%d",stu->score);
+}
+void addStudents(student **head_p)//在链表首端添加学生信息比末端更方便
+{
+    student *aStudent,*temp;
+    aStudent = (student*)malloc(sizeof(student));
+    getInput(aStudent);
+    aStudent->next_p = NULL;
+    if(*head_p == NULL)
+    {
+        *head_p = aStudent;
+    }
+    else
+    {
+        temp = *head_p;
+        *head_p = aStudent;
+        aStudent->next_p = temp;
+    }   
+}
+void Add_Information(student **head_p)
+{
+    int studentNumber;
+    printf("qin su ru xue sheng ge shu\n");
+    scanf("%d",&studentNumber);
+    for (int i = 0; i < studentNumber; i++)
+    {
+        addStudents(head_p);
+    }
+}
+
+void Show_Information(student *head_p)//打印学生信息
+{
+    student* temp;
+    temp = head_p;
+    if(!temp)
+    {
+        printf("There is no information!\n");
+    }
+    while (temp)
+    {
+        print(temp);
+        temp = temp->next_p;
+    }
+    
+}
+int main()
+{
+    student *head_p = NULL;
+    Add_Information(&head_p);
+    Show_Information(head_p);
 }

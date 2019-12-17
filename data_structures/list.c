@@ -21,6 +21,7 @@ void addBook(struct Book **library)
         printf("ƒ⁄¥Ê∑÷≈‰ ß∞‹\n");
         exit(1);
     }
+
     getInput(book);
     if (*library != NULL)
     {
