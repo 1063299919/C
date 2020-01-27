@@ -42,3 +42,4 @@ int main()
         printf("There are %d words >= 15",wordsNumber[15]);
     return 0;
 }
+//hello.
