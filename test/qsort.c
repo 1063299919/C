@@ -9,6 +9,7 @@
 // 第四个参数是一个指向函数的指针，
 // 表示调用的比较函数的函数名。
 // size_t代表unsigned int
+
 int compare(const void* a,const void* b)
 //比较函数，传入const void指针，返回值为int；
 {
