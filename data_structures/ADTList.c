@@ -2,10 +2,10 @@
 #include<stdlib.h>
 /*
     用数组实现表时，为了适应表元素类型的变化，将表类型list定义为一个结构。在该结构
-中，用ListItem来表示用户指定的元素类型。其数据成员为n,maxsize和元素数组table
-用L记录表长。当表为空时n的值为0,maxsize表示表的最大长度。table是记录表中元素
-的数组。表中第k个元素(1<=k<=n)存储在数组的第k-1个单元中.
-其优点是：
+    中，用ListItem来表示用户指定的元素类型。其数据成员为n,maxsize和元素数组table
+    用L记录表长。当表为空时n的值为0,maxsize表示表的最大长度。table是记录表中元素
+    的数组。表中第k个元素(1<=k<=n)存储在数组的第k-1个单元中.
+    其优点是：
     1无须为表示表元素之间的逻辑关系增加额外的存储空间。
     2可以方便地随机存取表中任一位置的元素。
 其缺点是：
@@ -13,13 +13,13 @@
     2由于数组要求占用连续的存储空间，因此在分配数组空间时，只能预先估计表的大小再进行存储分配。当表长变化较大时，难以确定数组的合适的大小。
 */
 
-typedef int Listitem;
+typedef int Listitem;//用户指定的元素的类型
 
 typedef struct alist *List;
 typedef struct alist 
 {
-    int n;
-    int maxsize;
+    int n;//成员数量
+    int maxsize;//表的最大长度
     Listitem *table;   //表的元素数组
 }Alist;
 
@@ -33,7 +33,10 @@ void listinsert(int k, Listitem x, List L);//在表L的位置k之后插入元素
 Listitem ListDelete( int k, List L);       //从表L中删除位置k处的元素
 void Printlist( List L);                   //按位置次序输出表L中元素
 
-
+void Error(char *strerror)
+{
+    puts(strerror);
+}
 List ListInit( int size)
 {
     List L = malloc(sizeof *L);
@@ -55,7 +58,7 @@ int ListLength(List L)
 
 int ListLocate( Listitem x, List L)
 {
-    int i;
+    //int i;
     for (int i = 0; i < (L->n); i++)
     {
         if (L->table[i] == x)
@@ -64,7 +67,7 @@ int ListLocate( Listitem x, List L)
         }
     }
     return 0;
-}//返回表L的位置k处的元素
+}//返回表Lk处的元素的位置
 
 Listitem ListRetrieve( int k, List L)
 {
@@ -75,7 +78,7 @@ Listitem ListRetrieve( int k, List L)
 
 void listinsert(int k, Listitem x, List L)
 {
-    int i;
+    //int i;
     if( k<0 || k>(L->n))
         Error("out of bound");
     if( L->n == L->maxsize)
@@ -91,7 +94,7 @@ void listinsert(int k, Listitem x, List L)
 
 Listitem ListDelete( int k, List L)
 {
-    int i;
+    //int i;
     Listitem x;
     if( k<1 || k>(L->n))
         Error("out of bound");
@@ -107,10 +110,22 @@ Listitem ListDelete( int k, List L)
 
 void PrintList(List L)
 {
-    int i;
+    //int i;
     for (int i = 0; i < L->n; i++)
     {
-        ItemShow(L->table[i]);
+        //  ItemShow(L->table[i]);
+        printf("%d\n", L->table[i]);
     }
     
+}
+
+int main()
+{
+    List L = ListInit(10);
+    for (int i = 0; i < 10; i++)
+    {
+        listinsert(i, i, L);
+    }
+    PrintList(L);
+    return 0;
 }
