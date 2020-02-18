@@ -2,8 +2,7 @@
     "files.defaultLanguage": "c", // ctrl+N新建文件后默认的语言
     "editor.formatOnType": true,  // 输入分号(C/C++的语句结束标识)后自动格式化当前这一行的代码
     "editor.suggest.snippetsPreventQuickSuggestions": false, // clangd的snippets有很多的跳转点，不用这个就必须手动触发Intellisense了
-    "editor.acceptSuggestionOnEnter": "on", // 我个人的习惯，按回车时一定是真正的换行，只有tab才会接受Intellisense
-    // "editor.snippetSuggestions": "top", // （可选）snippets显示在补全列表顶端，默认是inline
+    "editor.acceptSuggestionOnEnter": "on", // 控制除了 Tab 键以外， Enter 键是否同样可以接受建议。这能减少“插入新行”和“接受建议”命令之间的歧义。
 
     "code-runner.runInTerminal": true, // 设置成false会在“输出”中输出，无法输入
     "code-runner.executorMap": {
@@ -18,5 +17,6 @@
     "code-runner.ignoreSelection": false,   // 默认为false，效果是鼠标选中一块代码后可以单独执行，但C是编译型语言，不适合这样用
 
     "C_Cpp.clang_format_sortIncludes": true, // 格式化时调整include的顺序（按字母排序）
-    "editor.fontSize": 16,
+    "editor.fontSize": 15,
+    "editor.fontFamily": "'Droid Sans Mono', 'monospace', 'monospace', 'Droid Sans Fallback'"
 }
