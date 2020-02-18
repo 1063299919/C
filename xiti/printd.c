@@ -4,7 +4,7 @@ void printd(int n);
 
 int main()
 {
-    printd(985);
+    printd(9850);
 }
 
 void printd(int n)
