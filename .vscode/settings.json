@@ -18,5 +18,5 @@
 
     "C_Cpp.clang_format_sortIncludes": true, // 格式化时调整include的顺序（按字母排序）
     "editor.fontSize": 15,
-    "editor.fontFamily": "'Droid Sans Mono', 'monospace', 'monospace', 'Droid Sans Fallback'"
+    "editor.fontFamily": "'Droid Sans Mono', 'Consolas', 'monospace', 'Droid Sans Fallback'"
 }
