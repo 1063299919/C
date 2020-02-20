@@ -39,4 +39,7 @@
     "[c]": {
         // "files.encoding": "gbk" // 这样的格式可以对指定后缀的文件应用设置，如果你实在想用gbk，就这样设置吧。cpp同理。
     },
+    "files.associations": {
+        "ctype.h": "c"
+    },
 }
