@@ -13,7 +13,7 @@ int main()
 
 void reverse(char *str,int min,int max)
 {
-    if (min != max)
+    if (min < max)
     {
         char temp;
         temp = str[min];
