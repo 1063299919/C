@@ -6,3 +6,4 @@
 #*.cmd
 *~
 #test/
+.vscode
