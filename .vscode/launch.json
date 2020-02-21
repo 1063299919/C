@@ -14,7 +14,7 @@
                                       // 但是最新版cpptools有BUG，具体请看文末的注意
             "internalConsoleOptions": "neverOpen", // 如果不设为neverOpen，调试时会跳到“调试控制台”选项卡，你应该不需要对gdb手动输命令吧？
             "MIMode": "gdb", // 指定连接的调试器，可以为gdb或lldb。但目前lldb在windows下没有预编译好的版本。
-            "miDebuggerPath": "C:/MinGw/bin/gdb.exe", // 调试器路径，Windows下后缀不能省略，Linux下则不要
+            //"miDebuggerPath": "C:/MinGw/bin/gdb.exe", // 调试器路径，Windows下后缀不能省略，Linux下则不要
             "setupCommands": [ // 模板自带，好像可以更好地显示STL容器的内容，具体作用自行Google
                 {
                     "description": "Enable pretty-printing for gdb",

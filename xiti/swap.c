@@ -16,6 +16,6 @@ int main()
     //scanf("%d %d", &x, &y);
     swap(int, x, y);
     printf("x = %3d, y = %3d\n", x, y);
-    //swap(char, x, y);
+    swap(int, x, y);
     printf("x = %3c, y = %3c\n", x, y);
 }
