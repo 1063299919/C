@@ -31,7 +31,7 @@ v3
  */
 void strcpy(char *s , char *t)
 {
-    while ((*s++ = *t++))
+    while (*s++ = *t++)
         ;
 }
 
@@ -89,7 +89,7 @@ int main()
     char *s = "qwertyuiop";
     char *t = "iop";
     //printf("%d ", strlen(s));
-    strcpy(s, t);
+    strcpy(*s, *t);
     printf("%s", s);
 
 }
