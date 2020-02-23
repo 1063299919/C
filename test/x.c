@@ -1,24 +1,18 @@
 #include <stdio.h>
 
-void strcpy(char *s , char *t)
+void istrcpy(char *s , char *t)
 {
     while (*s++ = *t++)
         ;
 }
-
-void my_strcpy(char *s , char *t, int n)
-{
-    while (*s++ = *t++)
-        ;
-}
-
 
 int main()
 {
-    char *s = "qwertyuiop";
-    char *t = "iop";
-    //printf("%d ", strlen(s));
-    strcpy(s, t);
-    printf("%s", s);
+    char *s = "qwe";
+    char t[] = "iop";
+    char *ps = s;
+    char *pt = t;
+    istrcpy(t, s);
+
     return 0;
 }

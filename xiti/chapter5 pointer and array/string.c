@@ -88,8 +88,8 @@ int main()
 {
     char *s = "qwertyuiop";
     char *t = "iop";
-    //printf("%d ", strlen(s));
-    strcpy(s, t);
+    printf("%d ", strlen(s));
+    //strcpy(s, t);
     printf("%s", s);
 
 }
