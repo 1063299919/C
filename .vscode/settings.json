@@ -34,7 +34,7 @@
     "workbench.settings.useSplitJSON": true, // 恢复手动编辑时的两列设置
     "window.zoomLevel": 0, // 整体放大
 
-    "git.enabled": true, // 如果你不用git，可以考虑关闭它
+    "git.enabled": false, // 如果你不用git，可以考虑关闭它
     "git.ignoreMissingGitWarning": true, // 同上
 
     "[c]": {
