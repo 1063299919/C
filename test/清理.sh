@@ -1,3 +1,3 @@
-#rm *.exe
+rm *.exe
 rm *.out
 rm *.o
