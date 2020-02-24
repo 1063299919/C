@@ -62,8 +62,8 @@ value = *--P;*/
 //将t复制到s尾部
 void strcat(char *s ,char *t)
 {
-    while (*s++)
-        ;
+    while (*s)
+        s++;
     while (*s++ = *t++)
         ;
 }
@@ -86,10 +86,14 @@ int strend(char *s,char *t)
 
 int main()
 {
-    char *s = "qwertyuiop";
-    char *t = "iop";
-    printf("%d ", strlen(s));
-    //strcpy(s, t);
-    printf("%s", s);
+    char s[50] = "qwertyuiop";
+    char t[10] = "iop";
+    char r[10] = "iwqdj";
+    scanf("%s", s);
+    scanf("%s", t);
+    scanf("%s", r);
+    strcat(s, t);
+    strcat(s, r);
+    printf("%s\n", s);
 
 }
