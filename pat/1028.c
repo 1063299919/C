@@ -1,40 +1,63 @@
-#include <stdio.h>
-struct person {
-    char name[10];  //姓名
-    int yy, mm, dd;  //日期
-}oldest, youngest, left, right, temp;
-//oldest与youngest存放最老与最年轻的人，left与right存放合法日期的左右界
+#include<stdio.h>
 
-int LessEqu(struct person a, struct person b) {  //如果a的日期小于等于b，返回true
-    if(a.yy != b.yy) return a.yy <= b.yy;
-    else if(a.mm != b.mm) return a.mm <= b.mm;
-    else return a.dd <= b.dd;
-}
-int MoreEqu(struct person a, struct person b) {  //如果a的日期大于等于b，返回true
-    if(a.yy != b.yy) return a.yy >= b.yy;
-    else if(a.mm != b.mm) return a.mm >= b.mm;
-    else return a.dd >= b.dd;
-}
-//youngest与left为1814年9月6日，oldest与right为2014年9月6日
-void init() {
-    youngest.yy = left.yy = 1814;
-    oldest.yy = right.yy = 2014;
-    youngest.mm = oldest.mm = left.mm = right.mm = 9;
-    youngest.dd = oldest.dd = left.dd = right.dd = 6;
-}
-int main() {
-    init();  //初始化youngest、oldest、left、right
-    int n, num = 0;  //num存放合法日期的人数
+struct person
+{
+    char name[10];
+    int year;
+    int month;
+    int day;
+};
+
+int camp(struct person a,struct person b);
+int camp2(struct person a, struct person b);
+
+int main(int argc, char const *argv[])
+{
+    int n;
+    int count = 0;
+    struct person left = {"left",2014-200, 9, 6};
+    struct person right = {"right",2014, 9, 6};
+    struct person oldest, youngest, temp;
+    youngest = left;
+    oldest = right;
     scanf("%d", &n);
-    for(int i = 0; i < n; i++) {
-        scanf("%s %d/%d/%d", temp.name, &temp.yy, &temp.mm, &temp.dd);
-        if(MoreEqu(temp, left) && LessEqu(temp, right)) {  //日期合法
-            num++;
-            if(LessEqu(temp, oldest)) oldest = temp;  //更新oldest
-            if(MoreEqu(temp, youngest)) youngest = temp;  //更新youngest
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%s %d/%d/%d", temp.name, &temp.year, &temp.month, &temp.day);
+        if (camp(temp,right) || camp2(temp,left))
+            continue;
+        else
+        {
+            count++;
+            youngest = (camp(temp, youngest) ? temp : youngest);
+            oldest = (camp(temp, oldest) ? oldest : temp);
         }
+
     }
-    if(num == 0) printf("0\n");  //所有人的日期都不合法，只输出0
-    else printf("%d %s %s\n", num, oldest.name, youngest.name);
+    if (count != 0)
+        printf("%d %s %s", count, oldest.name, youngest.name);
+    else
+        printf("0");
+
     return 0;
+}
+
+int camp(struct person a,struct person b)
+{
+    if (a.year != b.year)
+        return a.year > b.year;
+    else if(a.month != b.month)
+        return a.month > b.month;
+    else
+        return a.day > b.day;
+}
+
+int camp2(struct person a,struct person b)
+{
+    if (a.year != b.year)
+        return a.year < b.year;
+    else if(a.month != b.month)
+        return a.month < b.month;
+    else
+        return a.day < b.day;
 }
