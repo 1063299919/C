@@ -58,3 +58,46 @@ StackItem Pop(Stack S)
     else
         return S->data[S->top--];
 }
+
+int StackSize(Stack S)
+{
+    return S->top + 1;
+}
+
+void StackIn(Stack S)
+{
+    int n;
+    printf("input the number of Items\n");
+    scanf("%d", &n);
+    S->top = n - 1;
+    for (int i = 0 ; i < n; i++)
+        scanf("%d\n", &S->data[i]);
+}
+
+void StackOut(Stack S)
+{
+    if(StackEmpty(S))
+        printf("Stack is empty");
+    else
+        for (int i = 0 ; i <= S->top; i++)
+            printf("%d\n", S->data[i]);
+}
+
+void StackSplit(Stack S1,Stack S2)
+{
+    int n = (S1->top + 1) / 2;
+    for (int i = 0; i < n; i++)
+        Push(Pop(S2), S1);
+}
+
+void StackCombine(Stack S1,Stack S2)
+{
+    int n = S2->top ;
+    for (int i = 0; i <= n; i++)
+    {
+        S1->data[S1->top + 1] = S2->data[i];
+        S1->top++;
+    }
+    for (int i = 0; i <= n; i++)
+        Pop(S2);
+}
