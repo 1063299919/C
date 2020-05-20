@@ -1,82 +1,101 @@
 #include <stdio.h>
 #include <string.h>
 
-#define MAXLINES 5000
+#define MAX_ARRAY_NUM	10
+#define MAX_LINE_LEN	100
+#define MAX_DEST_NUM	1000
 
-char *lineptr[MAXLINES]; //pointers to text line
+char *g_szArray[MAX_ARRAY_NUM];
+char g_szDest[MAX_DEST_NUM];
 
-int readlines(char *lineptr[], int nlines);
-void writelines(char *lineptr[], int nlines);
+int GetLine(char *szLine, int *pnLineLen);
+int ReadLines(char *szArray[], int *pnArrayNum);
+void Swap(char *v[], int i, int j);
+void Qsort(char *v[], int left, int right);
+void WriteLines(char *szArray[], int nArrayNum);
 
-void qsort(char *lineptr[], int left, int right);
-
-int main(int argc, char const *argv[])
+int main()
 {
-    int nlines; //number od in put lines read
+	int nArrayNum = 0;
 
-    if ((nlines = readlines(lineptr, MAXLINES)) >= 0)
-    {
-        qsort(lineptr, 0, nlines - 1);
-        writelines(lineptr, nlines);
-        return 0;
-    }
-    else
-    {
-        printf("error: input too big to sort\n");
-        return 1;
-    }
+	if (ReadLines(g_szArray, &nArrayNum) >= 0)
+	{
+		Qsort(g_szArray, 0, nArrayNum-1);
+		WriteLines(g_szArray, nArrayNum);
+	}
+	else
+		printf("error: read lines too big to sort\n");
+
+	return 0;
 }
 
-#define MAXLEN 1000
-int getline(char *, int);
-char *alloc(int);
+int ReadLines(char *szArray[], int *pnArrayNum)
+{
+	char szLine[MAX_LINE_LEN] = {0};
+	int nLineLen = 0;
+	char *pDest = g_szDest;
+	char *pDestStop = g_szDest + MAX_DEST_NUM;
 
-/* readlines:  read input lines */
-int readlines(char *lineptr[], int maxlines)
-{
-    int len, nlines;
-    char *p, line[MAXLEN];
-    nlines = 0;
-    while ((len = getline(line, MAXLEN)) > 0)
-        if (nlines >= maxlines || (p = alloc(len) == NULL))
-            return -1;
-        else
-        {
-            line[len - 1] = '\0'; /* delete newline */
-            strcpy(p, line);
-            lineptr[nlines++] = p;
-        }
-    return nlines;
-}
-/* writelines:  write output lines */
-void writelines(char *lineptr[], int nlines)
-{
-    while (nlines-- > 0)
-        printf("%s\n", *lineptr++);
+	while (GetLine(szLine, &nLineLen) > 0)
+	{
+		if (*pnArrayNum >= MAX_ARRAY_NUM || pDest + nLineLen >= pDestStop)
+			return -1;
+		else
+		{
+			szLine[nLineLen-1] = '\0';
+			strcpy(pDest, szLine);
+			szArray[(*pnArrayNum)++] = pDest;
+			pDest += nLineLen;
+		}
+	}
+
+	return *pnArrayNum;
 }
 
-/* qsort:  sort v[left]...v[right] into increasing order */
-   void qsort(char *v[], int left, int right)
-   {
-       int i, last;
-       void swap(char *v[], int i, int j);
-       if (left >= right)  /* do nothing if array contains */
-           return;         /* fewer than two elements */
-       swap(v, left, (left + right)/2);
-       last = left;
-       for (i = left+1; i <= right; i++)
-           if (strcmp(v[i], v[left]) < 0)
-               swap(v, ++last, i);
-       swap(v, left, last);
-       qsort(v, left, last-1);
-       qsort(v, last+1, right);
-   }
+int GetLine(char *szLine, int *pnLineLen)
+{
+	int c = 0;
+	char *pLine = szLine;
+	int nMaxLen = MAX_LINE_LEN;
 
-   /* swap:  interchange v[i] and v[j] */
-   void swap(char *v[], int i, int j)
-   {
-        char *temp;
-        temp = v[i];
-        v[i] = v[j];
-        v[j] = temp;
-   }
+	while (--nMaxLen > 0 && (c = getchar()) != EOF && c != '\n')
+		*szLine++ = c;
+	if (c == '\n')
+		*szLine++ = c;
+	*szLine = '\0';
+	*pnLineLen = szLine - pLine;
+
+	return *pnLineLen;
+}
+
+void Qsort(char *v[], int left, int right)
+{
+	int i = 0;
+	int last = 0;
+
+	if (left >= right)
+		return;
+	Swap(v, left, (left + right)/2);
+	last = left;
+	for (i = left+1; i <= right; i++)
+		if (strcmp(v[i], v[left]) < 0)
+			Swap(v, ++last, i);
+	Swap(v, left, last);
+	Qsort(v, left, last-1);
+	Qsort(v, last+1, right);
+}
+
+void Swap(char *v[], int i, int j)
+{
+	char *temp = NULL;
+
+	temp = v[i];
+	v[i] = v[j];
+	v[j] = temp;
+}
+
+void WriteLines(char *szArray[], int nArrayNum)
+{
+	while (nArrayNum-- > 0)
+		printf("%s\n", *szArray++);
+}
