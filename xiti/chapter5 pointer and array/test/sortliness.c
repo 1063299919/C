@@ -15,12 +15,9 @@ int getline(char *string, int maxlen){
     {
         *string++ = ch;
     }
-    if (ch == '\n')
+    if (string-p>0)
     {
-        *string++ = ch;
-    }else if (ch == EOF)
-    {
-        return -1;
+        *string++ = '\n';
     }
     *string = '\0';
     return string-p;
