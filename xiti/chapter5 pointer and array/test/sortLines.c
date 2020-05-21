@@ -67,28 +67,3 @@ void writelines(char *lineptr[],int maxlines)
 
 }
 
-void Qsort(char *v[], int left, int right)
-{
-	int i = 0;
-	int last = 0;
-
-	if (left >= right)
-		return;
-	Swap(v, left, (left + right)/2);
-	last = left;
-	for (i = left+1; i <= right; i++)
-		if (strcmp(v[i], v[left]) < 0)
-			Swap(v, ++last, i);
-	Swap(v, left, last);
-	Qsort(v, left, last-1);
-	Qsort(v, last+1, right);
-}
-
-void Swap(char *v[], int i, int j)
-{
-	char *temp = NULL;
-
-	temp = v[i];
-	v[i] = v[j];
-	v[j] = temp;
-}
