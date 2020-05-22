@@ -5,6 +5,24 @@
 
 #define MAXWORD 100
 
+#define BUFSIZE	100
+
+char buf[BUFSIZE] = {0};
+int bufp = 0;
+
+int getch(void)
+{
+	return (bufp > 0) ? buf[--bufp] : getchar();
+}
+
+void ungetch(int c)
+{
+	if (bufp >= BUFSIZE)
+		printf("ungetch: too many characters\n");
+	else
+		buf[bufp++] = c;
+}
+
 struct tnode
 {
     char *word;
@@ -17,12 +35,12 @@ struct tnode *addtree(struct tnode *, char *);
 void treeprint(struct tnode *);
 int getword(char *, int);
 
-main()
+int main()
 {
     struct tnode *root;
     char word[MAXWORD];
 
-    root == NULL;
+    root = NULL;
     while (getword(word,MAXWORD) != EOF)
     {
         if (isalpha(word[0]))
@@ -35,7 +53,7 @@ main()
 }
 
 struct  tnode *talloc(void);
-char *strdup(char *);
+char *mmstrdup(char *);
 
 struct tnode *addtree(struct tnode *p,char *w)
 {
@@ -44,7 +62,7 @@ struct tnode *addtree(struct tnode *p,char *w)
     if (p == NULL)
     {
         p = talloc();
-        p->word = strdup(w);
+        p->word = mstrdup(w);
         p->count = 1;
         p->left = p->right = NULL;
     }
@@ -78,14 +96,14 @@ struct tnode *talloc(void)
     return (struct tnode *)malloc(sizeof(struct tnode));
 }
 
-char *strdup(char *s)
+char *mstrdup(char *s)
 {
     char *p;
 
     p = (char *)malloc(strlen(s) + 1);
     if(p!= NULL)
     {
-        strcopy(p, s);
+        strcpy(p, s);
     }
     return p;
 }

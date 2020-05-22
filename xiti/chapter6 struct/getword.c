@@ -26,6 +26,4 @@ int getword(char *word, int lim)
         *w = '\0';
         return word[0];
     }
-
-
 }
